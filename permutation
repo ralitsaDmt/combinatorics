@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _23.Permutation
+{
+    class Permutation
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            int[] numbers = new int[n];
+            
+            for (int i = 0; i < n; i++)
+            {
+                numbers[i] = i + 1;                
+            }
+
+            GetPer(numbers);
+
+        }
+
+        private static void GetPer(int[] numbers)
+        {
+            int x = numbers.Length - 1;
+            GetPer(numbers, 0, x);
+        }
+
+        private static void GetPer(int[] numbers, int k, int m)
+        {
+            if (k==m)
+            {
+                Console.WriteLine(string.Join(" ", numbers));
+            }
+            else
+            {
+                for (int i = k; i <= m; i++)
+                {
+                    Swap(ref numbers[k], ref numbers[i]);
+                    GetPer(numbers, k + 1, m);
+                    Swap(ref numbers[k], ref numbers[i]);
+                }
+            }
+        }
+
+        private static void Swap(ref int a, ref int b)
+        {
+            if (a == b)
+            {
+                return;
+            }
+
+            a ^= b;
+            b ^= a;
+            a ^= b;
+        }
+    }
+}
